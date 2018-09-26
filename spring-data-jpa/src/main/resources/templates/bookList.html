@@ -1,0 +1,42 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="zh-CN">
+<head>
+    <script type="text/javascript" th:src="@{https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js}"></script>
+    <link th:href="@{https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet"/>
+    <meta charset="UTF-8"/>
+    <title>书单</title>
+</head>
+<style>
+    .price-set{
+        color: #E3393C;
+        font-size: 16px;
+    }
+    .name-set{
+        font-size: 14px;
+        color: black;
+    }
+    .amount-set{
+        color: #649cd9;
+        font-size: 14px;
+    }
+    .location-set{
+     font-size: 12px;
+    }
+</style>
+<body>
+<div class="container">
+    <h3>书单</h3>
+    <div class="row" >
+        <div class="col-xs-6 col-sm-3"  th:each="book : ${bookList}">
+            <div class="thumbnail">
+                <img th:src="@{${book.avatar}}">
+                <div class="caption location-set">
+                    <p class="name-set "><a th:href="@{/book/{bookId}(bookId=${book.id})}" th:text="${book.name}"></a></p>
+                    <h4 th:text="${book.author}" class="price-set"></h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
