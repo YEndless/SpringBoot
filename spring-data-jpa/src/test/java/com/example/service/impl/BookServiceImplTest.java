@@ -9,9 +9,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 
-/**
- * Created by 史冬阳 on 2018/9/20.
- */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class BookServiceImplTest {

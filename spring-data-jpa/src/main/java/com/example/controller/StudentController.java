@@ -2,16 +2,13 @@ package com.example.controller;
 
 import com.example.entity.Student;
 import com.example.service.StudentService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/student")
+@RequestMapping(value = "/student", method = RequestMethod.GET)
 public class StudentController {
     @Resource
     private StudentService studentService;
@@ -26,3 +23,5 @@ public class StudentController {
         return studentService.get(id);
     }
 }
+
+
