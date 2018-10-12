@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WebSocket页面</title>
+</head>
+<body>
+<h2>聊聊天</h2>
+<h2>请输入你想说的话:</h2>
+<input type="text" id="say" name="say">
+<input type="button" id="sendSay" name="sendSay" value="发送">
+
+<h2>软件1611</h2>
+<textarea id="message" cols="150px" rows="200px" disabled></textarea>
+
+<script>
+    var socket;
+    var say = document.getElementById("say");
+    var sendSay = document.getElementById("sendSay");
+    var message= document.getElementById("message");
+
+    if (typeof(WebSocket) == "undefined") {
+        console.log("您的浏览器不支持WebSocket");
+    } else {
+        console.log("您的浏览器支持WebSocket");
+        //实现化WebSocket对象，指定要连接的服务器地址与端口建立连接
+        socket = new WebSocket("ws://localhost:8080/websocket");
+
+        //打开事件
+        socket.onopen = function () {
+            console.log("Socket已打开");
+            // socket.send("这是来自客户端的消息:" + new Date());
+        };
+
+        sendSay.onclick = function sendSay(){
+            socket.send("这是来自客户端的消息:" + say.value)
+        };
+
+        //获得消息事件
+        socket.onmessage = function (msg) {
+            console.log(msg.data);
+            // alert(msg.data);
+            var messageInfo = message.value;
+            messageInfo = messageInfo + " \n " + msg.data;
+            message.value = messageInfo;
+        };
+
+        //关闭事件
+        socket.onclose = function () {
+            console.log("Socket已关闭");
+        };
+
+        //发生了错误事件
+        socket.onerror = function () {
+            alert("Socket发生了错误");
+        }
+    }
+</script>
+
+</body>
+</html>
